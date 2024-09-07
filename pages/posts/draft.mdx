@@ -1,0 +1,186 @@
+---
+title: Draft
+date: 2023/6/28
+description: An example of a draft post.
+draft: false
+tag: web development
+author: Ada Lovelace
+---
+
+# This is a draft page about how you can use this framework.
+
+# h1
+
+## h2
+
+### h3
+
+#### h4
+
+##### h5
+
+- bullet list
+- 1
+- 2
+- 3
+
+1. numbered list
+2. 1
+3. 2
+3. 3
+
+Because this post has `draft: true` defined in its frontmatter, it won't show up
+in the [list of posts](/posts) or
+[list of posts by tag](/tags/web%20development) but can be access directly by
+its url at [/posts/draft](/posts/draft).
+
+## Test `filename`, line highlighting and empty lines
+
+```js filename="test.js" {1} copy
+console.log("hello world");
+
+console.log("goodbye world");
+```
+
+## Test `showLineNumbers` and word highlighting
+
+```scala showLineNumbers {2-4} /println/
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+```
+
+## Test highlighting inline code
+
+`import React from 'react'{:js}`
+
+## Test without specified language
+
+```text /hello/
+hello world
+```
+
+## Test link in code
+
+Link to [`google`](https://google.com)
+
+Link to [GitHub](https://github.com)
+
+## Test table
+
+| Left | Center | Right | Right | Right | Right | Right | Right | Right | Right |
+| ---- | :----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: |
+| ss2  |  333   |  3232 |  3232 |  3232 |  3232 |  3232 |  3232 |  3232 |  3232 |
+|      |  222   |  3232 |  3232 |  3232 |  3232 |  3232 |  3232 |  3232 |  3232 |
+|      |   23   |       |       |       |       |       |       |       |       |
+
+import { Callout, Cards, FileTree, Steps, Tabs } from "nextra/components";
+import { CopyIcon, GitHubIcon, MenuIcon } from "nextra/icons";
+
+## Callout
+
+### Default
+
+<Callout>This is a default callout.</Callout>
+
+### Error
+
+<Callout type="error">This is an error callout.</Callout>
+
+### Info
+
+<Callout type="info">This is an info callout. [^2]</Callout>
+
+### Warning
+
+<Callout type="warning">This is a warning callout.</Callout>
+
+### With custom emoji [^1]
+
+<Callout emoji="🚀">This is a callout with a custom emoji.</Callout>
+
+## Steps
+
+<Steps>
+
+### Step 1
+
+Content for step 1.
+
+### Step 2
+
+Contents for step 2.
+
+</Steps>
+
+## Tabs
+
+{/* prettier-ignore */}
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+</Tabs>
+
+## FileTree
+
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen>
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
+
+<FileTree>
+  <FileTree.Folder name="users-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+  <FileTree.Folder name="posts-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+</FileTree>
+
+## Cards
+
+<Cards num={2}>
+  <Cards.Card
+    image
+    arrow
+    title="Documentation theme"
+    href="/docs/docs-theme/start"
+  >
+    <>![Documentation theme](https://nextra.site/assets/docs-theme.png)</>
+  </Cards.Card>
+  <Cards.Card image arrow title="Blog theme" href="/docs/blog-theme/start">
+    <>![Blog theme](https://nextra.site/assets/blog-theme.png)</>
+  </Cards.Card>
+</Cards>
+
+<Cards>
+  <Cards.Card icon={<CopyIcon />} title="Callout" href="/foo" />
+  <Cards.Card icon={<GitHubIcon />} title="Tabs" href="/bar" />
+  <Cards.Card icon={<MenuIcon />} title="Steps" href="/baz" />
+</Cards>
+
+[^1]: With custom emoji
+[^2]: This is an info callout.
+
+> And instead of spending time building things, they've convinced people
+> interested in these ideas that the first thing we need to do is write
+> standards. (**To engineers, this is absurd from the start -- standards are
+> things you write after you've got something working, not before!**)
