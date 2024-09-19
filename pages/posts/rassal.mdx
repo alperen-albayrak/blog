@@ -197,7 +197,7 @@ function draw() {
     </>
 }
 
-Piksellerin kırmızı, yeşil ve mavi renk değerlerine farklı değerler atarsak nasıl bir görsel ortaya çıkacağınıı da aşağıdaki kodla deneyebiliriz. Farklı perlin noiseler elde etmek için kırmızı değerini olduğu gibi bırakırken yeşilin değerlerine +1000 mavinin değerlerine +2000 ekledim. Bu şekilde her değerin farklı noktalardan örnek almasını sağladım.
+Piksellerin kırmızı, yeşil ve mavi renk değerlerine farklı değerler atarsak nasıl bir görsel ortaya çıkacağınıı da aşağıdaki kodla deneyebiliriz. Farklı perlin noiseler elde etmek için kırmızı değerini olduğu gibi bırakırken yeşilin değerlerine +10000 mavinin değerlerine +20000 ekledim. Bu şekilde her değerin farklı noktalardan örnek almasını sağladım.
 
 ```javascript showLineNumbers copy {25-34}
 function setup() {
@@ -226,8 +226,8 @@ function draw() {
 
       // Generate noise values for RGB channels
       let r1 = noise(xoff, yoff, zoff) * 255;
-      let r2 = noise(xoff + 1000, yoff + 1000, zoff + 1000) * 255;
-      let r3 = noise(xoff + 2000, yoff + 2000, zoff + 2000) * 255;
+      let r2 = noise(xoff + 10000, yoff + 10000, zoff + 10000) * 255;
+      let r3 = noise(xoff + 20000, yoff + 20000, zoff + 20000) * 255;
 
       // Set pixel color
       pixels[index] = r1; // Red channel
