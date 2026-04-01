@@ -61,6 +61,12 @@ const pagefindVars = {
         margin-right: auto;
       }
 
+      /* Spacing around iframe wrapper divs (prose doesn't margin divs by default) */
+      .prose div:has(> iframe) {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+
       /* Pagefind UI — light mode */
       .pagefind-ui__search-input {
         background-color: var(--fc-white) !important;
