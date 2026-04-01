@@ -21,8 +21,11 @@ import remarkToc from 'remark-toc';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: 'https://alperenalbayrak.dev',
+
   markdown: {
     remarkPlugins: [
       remarkMath,
@@ -35,6 +38,7 @@ export default defineConfig({
       rehypeKatex,
     ],
   },
+
   integrations: [
     expressiveCode({
       plugins: [pluginLineNumbers()],
@@ -61,4 +65,6 @@ export default defineConfig({
     tailwind(),
     sitemap(),
   ],
+
+  adapter: cloudflare()
 });
