@@ -55,6 +55,12 @@ const pagefindVars = {
         font-weight: inherit !important;
       }
 
+      /* Center iframes (Tailwind preflight sets iframe { display: block }) */
+      .prose iframe {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
       /* Pagefind UI — light mode */
       .pagefind-ui__search-input {
         background-color: var(--fc-white) !important;
