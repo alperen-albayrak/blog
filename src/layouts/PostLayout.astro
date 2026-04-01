@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+import TagList from '../components/TagList.astro';
+import { formatPostDate } from '../lib/date';
+
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  author?: string;
+  tags?: string[];
+  readingTime?: string;
+  relatedPosts?: CollectionEntry<'posts'>[];
+}
+
+const { title, description, date, author, tags = [], readingTime, relatedPosts = [] } = Astro.props;
+
+const formattedDate = formatPostDate(date);
+---
+
+<BaseLayout title={title} description={description} author={author}>
+  <article>
+    <header class="mb-8 pb-6 border-b border-flexoki-base-4 dark:border-flexoki-base-c">
+      <h1 class="text-2xl font-bold mb-3">{title}</h1>
+      <div class="text-sm text-flexoki-base-8 dark:text-flexoki-base-7 flex flex-wrap gap-3 items-center">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        {author && <span>by {author}</span>}
+        {readingTime && <span>{readingTime}</span>}
+        {tags.length > 0 && <TagList tags={tags} />}
+      </div>
+    </header>
+    <div class="prose dark:prose-invert prose-neutral max-w-none prose-a:underline-offset-2 prose-a:text-flexoki-blue dark:prose-a:text-flexoki-blue-d dark:prose-headings:text-flexoki-base-5 dark:prose-strong:text-flexoki-base-5">
+      <slot />
+    </div>
+    {relatedPosts.length > 0 && (
+      <footer class="mt-12 pt-8 border-t border-flexoki-base-4 dark:border-flexoki-base-c">
+        <RelatedPosts posts={relatedPosts} />
+      </footer>
+    )}
+  </article>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="Search posts">
+  <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <h1 class="text-xl font-bold mb-8">Search</h1>
+  <div id="search"></div>
+</BaseLayout>
+
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+<script is:inline>
+  new PagefindUI({ element: '#search', showImages: false });
+</script>

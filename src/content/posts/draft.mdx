@@ -1,0 +1,72 @@
+---
+title: Draft
+date: 2024/09/07
+description: An example of a draft post.
+draft: true
+tags: web development,en
+---
+
+# This is a draft page about how you can use this framework.
+
+# h1
+
+## h2
+
+### h3
+
+#### h4
+
+##### h5
+
+- bullet list
+- 1
+- 2
+- 3
+
+1. numbered list
+2. 1
+3. 2
+4. 3
+
+## Test `filename`, line highlighting and empty lines
+
+```js title="test.js" {1}
+console.log("hello world");
+
+console.log("goodbye world");
+```
+
+## Test `showLineNumbers`
+
+```scala showLineNumbers {2-4} /println/
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+```
+
+## Test without specified language
+
+```text
+hello world
+```
+
+## Test link in code
+
+Link to [`google`](https://google.com)
+
+Link to [GitHub](https://github.com)
+
+## Test table
+
+| Left | Center | Right |
+| ---- | :----: | ----: |
+| ss2  |  333   |  3232 |
+|      |  222   |  3232 |
+|      |   23   |       |
+
+> And instead of spending time building things, they've convinced people
+> interested in these ideas that the first thing we need to do is write
+> standards. (**To engineers, this is absurd from the start -- standards are
+> things you write after you've got something working, not before!**)

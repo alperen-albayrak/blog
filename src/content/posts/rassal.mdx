@@ -3,7 +3,7 @@ title: TR | Rassal sayılar ile bulut oluşturma
 date: 2024/09/07
 description: p5.js kullanarak rastgele sayılar ile bulut oluşturma
 draft: false
-tag: tr,web development,creative coding
+tags: tr,web development,creative coding
 author: Alperen Albayrak
 ---
 
@@ -19,7 +19,7 @@ Sürekli rassal sayılar elde etmek için perlin noise adındaki bir yöntemi ku
 
 Ürettiğimiz rassal sayıları x'e bağlı olarak çizdirmek için p5.js adındaki kütüphaneyi kullanabiliriz. Aşağıdaki p5.js ile yazılmış kod x'e bağlı ürettiği rassal sayıları bir grafik halinde gösteriyor.
 
-```javascript showLineNumbers copy {16}
+```javascript
 xoff = 0;
 start = 0;
 inc = 0.01;
@@ -46,75 +46,33 @@ function draw() {
 
 Bu kodun çıktısı da aşağıdaki gibi oluyor. Gördüğümüz gibi bir süreklilik olmadığı için oluşan şekil de doğal görünmüyor.
 
-{
-    <>
-    <div style={{
-                'align-items': 'center',
-            }}
-    >
-        <iframe
-                src="https://depo.alperenalbayrak.dev/p5js/noise2d.html"
-                width="100px"
-                height="100px"
-                style={{
-                    'border': '0px',
-                    'margin': 'auto',
-                    'padding': '0px',
-                    'width': '100px',
-                    'height': '100px',
-                    'overflow': 'hidden',
-                    'background-color':'#201c1c',
-                }}
-                scrolling="no"
-        ></iframe>
-        <div style={{
-                'text-align': 'center',
-                'padding': '15px', 
-            }}
-        >
-            x'e bağlı süreksiz rassal sayı
-        </div>
-    </div>
-    </>
-}
+<div style="text-align:center">
+  <iframe
+    src="https://depo.alperenalbayrak.dev/p5js/noise2d.html"
+    width="100"
+    height="100"
+    style="border:0;background-color:#201c1c;overflow:hidden"
+    scrolling="no"
+  ></iframe>
+  <p>x'e bağlı süreksiz rassal sayı</p>
+</div>
 
 Bu kodda 15. satırı aşağıdaki şekilde değiştirirsek çıktısının daha doğal göründüğünü ve yanal eksenden yer şekilleri gibi göründüğünü söyleyebiliriz.
 
-```javascript copy
+```javascript
 let y = noise(0,width);
 ```
 
-{
-    <>
-    <div style={{
-                'align-items': 'center',
-            }}
-    >
-        <iframe
-                src="https://depo.alperenalbayrak.dev/p5js/perlinnoise2d.html"
-                width="100px"
-                height="100px"
-                style={{
-                    'border': '0px',
-                    'margin': 'auto',
-                    'padding': '0px',
-                    'width': '100px',
-                    'height': '100px',
-                    'overflow': 'hidden',
-                    'background-color':'#201c1c',
-                }}
-                scrolling="no"
-        ></iframe>
-        <div style={{
-                'text-align': 'center',
-                'padding': '15px', 
-            }}
-        >
-            x'e bağlı sürekli rassal sayı
-        </div>
-    </div>
-    </>
-}
+<div style="text-align:center">
+  <iframe
+    src="https://depo.alperenalbayrak.dev/p5js/perlinnoise2d.html"
+    width="100"
+    height="100"
+    style="border:0;background-color:#201c1c;overflow:hidden"
+    scrolling="no"
+  ></iframe>
+  <p>x'e bağlı sürekli rassal sayı</p>
+</div>
 
 ## Bulutumuzu oluşturalım
 
@@ -123,7 +81,7 @@ Bulutumuzu oluşturmak için perlin noise fonksiyonunun x ve y değerine göre �
 Bu sefer p5.js kütüphanesinin pikseller üzerinde işlem yapmamıza izin veren fonksiyonlarını kullanarak bir şekil oluşturacağız.
 RGB değerlerinin hepsine aynı değeri atadığımız için ortaya çıkan görüntü siyah beyaz oldu.
 
-```javascript showLineNumbers copy {25-32}
+```javascript
 function setup() {
   createCanvas(100, 100);
   noStroke();
@@ -140,23 +98,16 @@ function draw() {
   let zinc = 0.01;
   let zoff = frameCount * zinc;
 
-  // Initialize y offset
   let yoff = 0;
   for (let y = 0; y < height; y++) {
-    // Initialize x offset
     let xoff = 0;
     for (let x = 0; x < width; x++) {
       let index = (x + y * width) * 4;
-
-      // Generate noise values for RGB channels
       let r1 = noise(xoff, yoff, zoff) * 255;
-
-      // Set pixel color
-      pixels[index] = r1; // Red channel
-      pixels[index + 1] = r1; // Green channel
-      pixels[index + 2] = r1; // Blue channel
-      pixels[index + 3] = 255; // Alpha channel
-
+      pixels[index] = r1;
+      pixels[index + 1] = r1;
+      pixels[index + 2] = r1;
+      pixels[index + 3] = 255;
       xoff += inc;
     }
     yoff += inc;
@@ -165,47 +116,26 @@ function draw() {
 }
 ```
 
-{
-    <>
-    <div style={{
-                'align-items': 'center',
-            }}
-    >
-        <iframe
-                src="https://depo.alperenalbayrak.dev/p5js/cloudy.html"
-                width="100px"
-                height="100px"
-                style={{
-                    'border': '0px',
-                    'margin': 'auto',
-                    'padding': '0px',
-                    'width': '100px',
-                    'height': '100px',
-                    'overflow': 'hidden',
-                    'background-color':'#201c1c',
-                }}
-                scrolling="no"
-        ></iframe>
-        <div style={{
-                'text-align': 'center',
-                'padding': '15px', 
-            }}
-        >
-            Perlin Noise Bulutu
-        </div>
-    </div>
-    </>
-}
+<div style="text-align:center">
+  <iframe
+    src="https://depo.alperenalbayrak.dev/p5js/cloudy.html"
+    width="100"
+    height="100"
+    style="border:0;background-color:#201c1c;overflow:hidden"
+    scrolling="no"
+  ></iframe>
+  <p>Perlin Noise Bulutu</p>
+</div>
 
-Piksellerin kırmızı, yeşil ve mavi renk değerlerine farklı değerler atarsak nasıl bir görsel ortaya çıkacağınıı da aşağıdaki kodla deneyebiliriz. Farklı perlin noiseler elde etmek için kırmızı değerini olduğu gibi bırakırken yeşilin değerlerine +10000 mavinin değerlerine +20000 ekledim. Bu şekilde her değerin farklı noktalardan örnek almasını sağladım.
+Piksellerin kırmızı, yeşil ve mavi renk değerlerine farklı değerler atarsak nasıl bir görsel ortaya çıkacağını da aşağıdaki kodla deneyebiliriz.
 
-```javascript showLineNumbers copy {25-34}
+```javascript
 function setup() {
   createCanvas(100, 100);
   noStroke();
   pixelDensity(1);
   describe("A noise-based colorful pattern evolving over time.");
-  frameRate(30); // Set the frame rate to 30 frames per second
+  frameRate(30);
 }
 
 function draw() {
@@ -216,25 +146,18 @@ function draw() {
   let zinc = 0.01;
   let zoff = frameCount * zinc;
 
-  // Initialize y offset
   let yoff = 0;
   for (let y = 0; y < height; y++) {
-    // Initialize x offset
     let xoff = 0;
     for (let x = 0; x < width; x++) {
       let index = (x + y * width) * 4;
-
-      // Generate noise values for RGB channels
       let r1 = noise(xoff, yoff, zoff) * 255;
       let r2 = noise(xoff + 10000, yoff + 10000, zoff + 10000) * 255;
       let r3 = noise(xoff + 20000, yoff + 20000, zoff + 20000) * 255;
-
-      // Set pixel color
-      pixels[index] = r1; // Red channel
-      pixels[index + 1] = r2; // Green channel
-      pixels[index + 2] = r3; // Blue channel
-      pixels[index + 3] = 255; // Alpha channel
-
+      pixels[index] = r1;
+      pixels[index + 1] = r2;
+      pixels[index + 2] = r3;
+      pixels[index + 3] = 255;
       xoff += inc;
     }
     yoff += inc;
@@ -243,39 +166,16 @@ function draw() {
 }
 ```
 
-Kodumuzun çıktısı da aşağıdaki gibi oluyor.
-
-{
-    <>
-    <div style={{
-                'align-items': 'center',
-            }}
-    >
-        <iframe
-                src="https://depo.alperenalbayrak.dev/p5js/coloredcloudy.html"
-                width="100px"
-                height="100px"
-                style={{
-                    'border': '0px',
-                    'margin': 'auto',
-                    'padding': '0px',
-                    'width': '100px',
-                    'height': '100px',
-                    'overflow': 'hidden',
-                    'background-color':'#201c1c',
-                }}
-                scrolling="no"
-        ></iframe>
-        <div style={{
-                'text-align': 'center',
-                'padding': '15px', 
-            }}
-        >
-            Renkli Perlin Noise Bulutu
-        </div>
-    </div>
-    </>
-}
+<div style="text-align:center">
+  <iframe
+    src="https://depo.alperenalbayrak.dev/p5js/coloredcloudy.html"
+    width="100"
+    height="100"
+    style="border:0;background-color:#201c1c;overflow:hidden"
+    scrolling="no"
+  ></iframe>
+  <p>Renkli Perlin Noise Bulutu</p>
+</div>
 
 ## Kod Linkleri
 

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+const allPosts = await getPublishedPosts();
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Posts">
+  <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <h1 class="text-xl font-bold mb-6">Posts</h1>
+  <div id="search" class="mb-8"></div>
+  {posts.length > 0 ? (
+    <PostList posts={posts} />
+  ) : (
+    <p class="text-flexoki-base-8 dark:text-flexoki-base-7">No posts yet.</p>
+  )}
+</BaseLayout>
+
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+<script is:inline>
+  new PagefindUI({ element: '#search', showImages: false });
+</script>

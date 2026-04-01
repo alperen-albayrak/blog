@@ -1,0 +1,179 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import {
+  WHITE, BLACK, BASE_4, BASE_5, BASE_7, BASE_8, BASE_9, BASE_C, BASE_D, YELLOW_D,
+} from '../colors.mjs';
+
+interface Props {
+  title: string;
+  description?: string;
+  author?: string;
+}
+
+const { title, description = "Alperen Albayrak's blog", author } = Astro.props;
+const siteTitle = 'Alperen Albayrak';
+const fullTitle = title === siteTitle ? title : `${title} – ${siteTitle}`;
+
+const pagefindVars = {
+  'fc-white':      WHITE,
+  'fc-black':      BLACK,
+  'fc-base-4':     BASE_4,
+  'fc-base-5':     BASE_5,
+  'fc-base-7':     BASE_7,
+  'fc-base-8':     BASE_8,
+  'fc-base-9':     BASE_9,
+  'fc-base-c':     BASE_C,
+  'fc-base-d':     BASE_D,
+  'fc-mark-light': YELLOW_D + '33',
+  'fc-mark-dark':  YELLOW_D + '40',
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {author && <meta name="author" content={author} />}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png" />
+    <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <slot name="head" />
+    <style define:vars={pagefindVars} is:global>
+      /* Heading anchor links (rehype-autolink-headings) */
+      .prose :is(h1, h2, h3, h4, h5, h6) a {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-weight: inherit !important;
+      }
+
+      /* Pagefind UI — light mode */
+      .pagefind-ui__search-input {
+        background-color: var(--fc-white) !important;
+        color: var(--fc-black) !important;
+        border-color: var(--fc-base-4) !important;
+        border-radius: 6px !important;
+        font-family: 'Inter', sans-serif !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      .pagefind-ui__search-input::placeholder {
+        color: var(--fc-base-7) !important;
+      }
+      .pagefind-ui__search-input:focus {
+        border-color: var(--fc-base-8) !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      .pagefind-ui__form {
+        border-radius: 6px !important;
+      }
+      .pagefind-ui__search-clear {
+        background-color: transparent !important;
+        color: var(--fc-base-8) !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .pagefind-ui__results-area {
+        margin-top: 1.5rem !important;
+      }
+      .pagefind-ui__result {
+        padding: 1rem 0 !important;
+        border-top: 1px solid var(--fc-base-4) !important;
+        border-bottom: none !important;
+      }
+      .pagefind-ui__result-link {
+        color: var(--fc-black) !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        font-size: 0.95rem !important;
+      }
+      .pagefind-ui__result-link:hover {
+        color: var(--fc-base-8) !important;
+      }
+      .pagefind-ui__result-excerpt {
+        color: var(--fc-base-8) !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        margin-top: 0.25rem !important;
+      }
+      .pagefind-ui__message {
+        color: var(--fc-base-7) !important;
+        font-size: 0.85rem !important;
+        padding: 0.5rem 0 !important;
+      }
+      #search mark {
+        background-color: var(--fc-mark-light);
+        color: inherit;
+        border-radius: 2px;
+      }
+
+      /* Pagefind UI — dark mode */
+      .dark .pagefind-ui__search-input {
+        background-color: var(--fc-base-d) !important;
+        color: var(--fc-base-5) !important;
+        border-color: var(--fc-base-c) !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      .dark .pagefind-ui__search-input::placeholder {
+        color: var(--fc-base-9) !important;
+      }
+      .dark .pagefind-ui__search-input:focus {
+        border-color: var(--fc-base-7) !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      .dark .pagefind-ui__search-clear {
+        background-color: transparent !important;
+        color: var(--fc-base-7) !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .dark .pagefind-ui__result {
+        border-top-color: var(--fc-base-c) !important;
+      }
+      .dark .pagefind-ui__result-link {
+        color: var(--fc-base-5) !important;
+      }
+      .dark .pagefind-ui__result-link:hover {
+        color: var(--fc-base-7) !important;
+      }
+      .dark .pagefind-ui__result-excerpt {
+        color: var(--fc-base-7) !important;
+      }
+      .dark .pagefind-ui__message {
+        color: var(--fc-base-7) !important;
+      }
+      .dark #search mark {
+        background-color: var(--fc-mark-dark);
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'light' || (!stored && !prefersDark)) {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-flexoki-paper dark:bg-flexoki-black text-flexoki-black dark:text-flexoki-base-5 font-sans min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 max-w-2xl mx-auto w-full px-4 py-8" data-pagefind-body>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

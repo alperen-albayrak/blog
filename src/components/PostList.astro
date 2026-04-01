@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from './TagList.astro';
+import { formatPostDate } from '../lib/date';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="space-y-8">
+  {posts.map((post) => (
+    <li>
+      <a href={`/posts/${post.slug}`} class="group block">
+        <h2 class="font-medium group-hover:text-flexoki-base-8 dark:group-hover:text-flexoki-base-7 transition-colors">
+          {post.data.title}
+        </h2>
+        <time
+          datetime={post.data.date.toISOString()}
+          class="text-sm text-flexoki-base-8 dark:text-flexoki-base-7"
+        >
+          {formatPostDate(post.data.date)}
+        </time>
+        {post.data.description && (
+          <p class="mt-1 text-sm text-flexoki-base-8 dark:text-flexoki-base-7">
+            {post.data.description}
+          </p>
+        )}
+      </a>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <TagList tags={post.data.tags} class="mt-2" />
+      )}
+    </li>
+  ))}
+</ul>
